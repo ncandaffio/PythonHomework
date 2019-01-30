@@ -1,3 +1,3 @@
 # python-challenge
 
-#Python homework for Nick Candaffio
+Python homework for Nick Candaffio
