@@ -14,27 +14,9 @@ profit_date = "none"
 loss_date = "none"
     
 
-def greatest_profit (r):
-        pv = profit_value
-        pd = profit_date
-
-        if int(r[1]) > pv:
-                profit_value = int(r[1])
-                profit_date = r[0]
-
-
-def greatest_loss (r):
-        pv = profit_value
-        pd = profit_date       
-    if int(r[1]) < loss_value:
-        loss_value = int(r[1])
-        loss_date = r[0]
-
-
 #Open the file and define new lines
 with open(path,newline = '') as csv_file:
     csv_data = csv.reader(csv_file, delimiter=',')
-
 
     #Identify the header column
     headers = next(csv_data)
@@ -44,20 +26,24 @@ with open(path,newline = '') as csv_file:
     months += 1
     net_profit += int(first_row[1])
     last_profit = int(first_row[1])
-    greatest_loss(first_row)
-    greatest_profit(first_row)
 
     #Begin looping through the data
     for row in csv_data:
         months += 1
         net_profit += int(row[1])
-        total_changes += int(row[1]) - last_profit
+        profit_change = int(row[1]) - last_profit
+        if profit_change > profit_value:
+                profit_value = profit_change
+                profit_date = row[0]
+        if profit_change < loss_value:
+                loss_value = profit_change
+                loss_date = row[0]
+        total_changes += profit_change
         last_profit = int(row[1])
-        greatest_loss(row)
-        greatest_profit(row)
 
     #Calculate the average change
     average_change = total_changes / (months - 1)
+
 
     #Begin Printout
     print("Financial Analysis")
