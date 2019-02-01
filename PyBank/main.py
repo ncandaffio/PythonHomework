@@ -53,3 +53,13 @@ with open(path,newline = '') as csv_file:
     print(f"Average Change: {'${:,.2f}'.format(average_change)}")
     print(f"Greatest Increase in Profits: {profit_date} {'${:,.2f}'.format(profit_value)}")
     print(f"Greatest Decrease in Profits: {loss_date} {'${:,.2f}'.format(loss_value)}") 
+
+    #Text File output
+    f = open("PyBank_Financial_Analysis.txt","w")
+    f.write("Financial Analysis\n")
+    f.write("-------------------------------\n")
+    f.write(f"Total months: {months}\n")
+    f.write(f"Net Profit: {'${:,.2f}'.format(net_profit)}\n")
+    f.write(f"Average Change: {'${:,.2f}'.format(average_change)}\n")
+    f.write(f"Greatest Increase in Profits: {profit_date} {'${:,.2f}'.format(profit_value)}\n")
+    f.write(f"Greatest Decrease in Profits: {loss_date} {'${:,.2f}'.format(loss_value)}\n") 
