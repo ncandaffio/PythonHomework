@@ -3,7 +3,8 @@ import csv
 candidates = []
 votes = 0
 results = dict()
-precents = dict()
+percents = dict()
+
 
 path = "election_data.csv"
 with  open(path,newline ="") as csv_reader:
@@ -21,15 +22,21 @@ with  open(path,newline ="") as csv_reader:
         votes += 1
 
 for c in candidates:
-    precents.update({c:results[c]/votes})
+    percents.update({c:results[c]/votes})
 
-winner_percent = max(precents.values())
-winner_name = [name for name in precents.items() if name == winner_percent]
+winner_percent = max(percents.values())
+winner_name = [name for name, number in percents.items() if number == winner_percent]
 
-print(dict(results))
-print(candidates)
-print(votes)
-print(winner_percent)
-print(winner_name)
+def print_results(p):
+    r = results
+    for item in p:
+        print(f"{item}: {'{:,.2f}%'.format(p[item]*100)} ({r[item]})")
+
+print(results)
+print("Election Results")
+print("-----------------------------------")
+print(f"Total Votes: {votes}")
+print("-----------------------------------")
+print(print_results(percents))
 
 
